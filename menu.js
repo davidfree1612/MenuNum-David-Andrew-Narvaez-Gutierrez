@@ -1,6 +1,10 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
-import Operacion from "./Operacion.js";
+import Suma from "./operaciones/Suma.js";
+import Resta from "./operaciones/Resta.js";
+import Multiplicacion from "./operaciones/Multiplicacion.js";
+import Division from "./operaciones/Division.js";
+
 
 class Menu {
   async mostrar() {
@@ -33,13 +37,24 @@ class Menu {
         { type: "number", name: "num2", message: "Ingresa el segundo número:" }
       ]);
 
-      const operacion = new Operacion(num1, num2);
-
+      let resultado;
       switch (opcion) {
-        case "sumar": console.log(chalk.green(`Resultado: ${operacion.sumar()}`)); break;
-        case "restar": console.log(chalk.yellow(`Resultado: ${operacion.restar()}`)); break;
-        case "multiplicar": console.log(chalk.blue(`Resultado: ${operacion.multiplicar()}`)); break;
-        case "dividir": console.log(chalk.magenta(`Resultado: ${operacion.dividir()}`)); break;
+        case "sumar":
+          resultado = new Suma(num1, num2).ejecutar();
+          console.log(chalk.green(`Resultado: ${resultado}`));
+          break;
+        case "restar":
+          resultado = new Resta(num1, num2).ejecutar();
+          console.log(chalk.yellow(`Resultado: ${resultado}`));
+          break;
+        case "multiplicar":
+          resultado = new Multiplicacion(num1, num2).ejecutar();
+          console.log(chalk.blue(`Resultado: ${resultado}`));
+          break;
+        case "dividir":
+          resultado = new Division(num1, num2).ejecutar();
+          console.log(chalk.magenta(`Resultado: ${resultado}`));
+          break;
       }
     }
   }
